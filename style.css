@@ -1,3 +1,4 @@
+/* リセットCSS */
 * {
   margin: 0;
   padding: 0;
@@ -5,24 +6,144 @@
 }
 
 body {
-  font-family: "Helvetica Neue", sans-serif;
-  background: #f5f5f5;
+  font-family: "Helvetica Neue", sans-serif, "Hiragino Kaku Gothic ProN", Meiryo, sans-serif;
+  background: #ffffff;
   color: #333;
+  line-height: 1.6;
 }
 
+/* ヘッダー */
 header {
   background: #ffffff;
-  border-bottom: 1px solid #ccc;
+  padding: 10px 0;
+  text-align: center; /* 画像を中央寄せするため */
 }
 
-.logo-area {
-  text-align: center;
-  padding: 20px 0;
+/* ... 既存の .logo-area, .main-nav など ... */
+
+header img { /* ヘッダー画像用スタイル */
+  max-width: 100%; /* 親要素の幅に合わせて縮小 */
+  height: 300px; /* アスペクト比を維持 */
+  object-fit: cover; /* ★追加：指定した高さに合わせて画像をトリミング */
+  display: block; /* 中央寄せのためにブロック要素にする */
+  /* margin: 20px auto 0;  この行を削除またはコメントアウト */
+  margin: 0 auto; /* ★修正：上下の余白をなくし、左右を自動で中央寄せに */
 }
 
+/* スマートフォンなど小さい画面での調整 */
+@media (max-width: 768px) {
+    header img {
+        height: 150px; /* ★修正：モバイル時は高さを低くする */
+        margin-top: 0;
+    }
+
+    /* クイックリンクのモバイル調整 */
+    .quick-links {
+        flex-direction: column; /* 縦並びにする */
+        align-items: center; /* 中央寄せ */
+        gap: 20px;
+    }
+    .quick-link-item {
+        width: 90%; /* モバイル時の幅を調整 */
+        max-width: 300px; /* モバイルでも最大幅を維持 */
+    }
+
+    /* main のモバイル調整 */
+    main {
+        margin: 20px 10px;
+        padding: 0;
+    }
+
+    /* profile.html のモバイル調整 */
+    .profile-content {
+        flex-direction: column;
+        align-items: center;
+        gap: 20px;
+    }
+    .profile-image-wrapper {
+        width: 100%;
+        max-width: 280px;
+        height: auto;
+        margin-bottom: 15px;
+        border-radius: 0;
+    }
+    .profile-photo-main {
+        object-fit: contain;
+    }
+    .profile-text {
+        text-align: center;
+        padding: 0 10px;
+    }
+    .profile-name {
+        text-align: center;
+    }
+    .profile-section {
+        padding: 20px;
+    }
+    .profile-section h2, .profile-section h3 {
+        font-size: 1.5em;
+        margin-bottom: 15px;
+    }
+    #methods ul {
+        grid-template-columns: 1fr;
+    }
+    .main-nav ul {
+        flex-direction: column;
+    }
+    .main-nav li {
+        margin: 0;
+        width: 100%;
+        text-align: center;
+    }
+    .main-nav a {
+        padding: 10px;
+    }
+
+    /* reserve.html用のモバイル調整 */
+    .reservation-content h3 {
+        text-align: center;
+    }
+    .access-title {
+        text-align: center;
+    }
+    .fee-list {
+        padding: 10px 15px;
+    }
+    .contact-guidance {
+        padding: 20px; /* パディングを調整 */
+        margin-top: 20px;
+        margin-bottom: 30px;
+    }
+    .contact-guidance p {
+        font-size: 1em;
+    }
+    .contact-button {
+        padding: 10px 20px;
+        font-size: 1em;
+    }
+}  
+  
 .logo-area h1 {
-  font-size: 20px;
-  line-height: 1.5;
+  font-size: 2em; /* h1全体の基準サイズ（必要に応じて調整） */
+  line-height: 1.2;
+  margin-bottom: 5px;
+  /* text-align: center; ← h1自体は中央寄せされているはずなので不要なら削除 */
+}
+
+/* 「運命鑑定」のスタイル (必要なら残す) */
+.logo-area h1 span { /* これは「運命鑑定」に適用されるスタイル */
+  font-size: 0.6em; /* 必要に応じて調整 */
+  display: block; /* これは現状維持 */
+}
+
+/* 「命理庵」を大きくする新しいスタイル */
+.logo-area h1 .main-title {
+  font-size: 1em; /* ここで「命理庵」のサイズを調整。h1の2em * 1.5em = 3em相当になります */
+  /* 必要であれば、色や太さもここで調整できます */
+  /* font-weight: bold; */
+  /* color: #0c2f56; */
+  display: block; /* 改行したい場合 */
+  /* display: inline; /* 改行せず横並びにしたい場合 */
 }
 
 .main-nav {
@@ -33,109 +154,634 @@ header {
   display: flex;
   justify-content: center;
   list-style: none;
-}
-
-.main-nav li {
-  margin: 0 15px;
+  padding: 0;
+  margin: 0;
 }
 
 .main-nav a {
   color: #fff;
   text-decoration: none;
-  padding: 10px;
+  padding: 15px 20px;
   display: block;
+  transition: background-color 0.3s ease;
 }
 
-.main-visual {
-  background: #ddd;
-  height: 300px;
-  display: flex;
-  justify-content: center;
-  align-items: center;
+.main-nav a:hover {
+  background-color: #555;
 }
 
-.image-placeholder {
-  width: 100%;
-  font-size: 18px;
-  color: #555;
-}
-
-.container {
-  display: flex;
-  max-width: 1200px;
+/* メインコンテンツエリアの基本スタイル (index.html, profile.html, reserve.htmlで共通) */
+main {
+  max-width: 960px;
   margin: 30px auto;
-  gap: 30px;
+  padding: 0 20px;
+}
+
+.content.container {
+    display: block; /* flexを解除 */
+    max-width: 960px;
+    margin: 30px auto;
+    padding: 0; /* paddingをリセット */
 }
 
 .main-column {
-  flex: 3;
+    width: 100%; /* 幅を100%にする */
+    min-width: unset; /* 最小幅を解除 */
+    flex: none; /* flex関連のプロパティを解除 */
 }
 
-.main-column h2 {
-  margin-bottom: 20px;
-  font-size: 20px;
-}
 
-.card-list {
-  display: flex;
-  flex-direction: column;
-  gap: 20px;
-}
+/* --- トップページ (index.html) のスタイル --- */
+/* 注意: main-visualはheaderに移動したため、このセクションから削除 */
 
-.card {
-  background: #fff;
-  padding: 15px;
-  border: 1px solid #ccc;
-}
-
-.card.large {
-  padding: 20px;
-}
-
-.card .image-box {
-  background: #ccc;
-  height: 150px;
-  margin-bottom: 10px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
-
-.sidebar {
-  flex: 1;
-}
-
-.profile-box, .search-box, .news-box {
-  background: #fff;
-  padding: 15px;
-  margin-bottom: 20px;
-  border: 1px solid #ccc;
+/* 新しい index.html の .welcome-section スタイル */
+.welcome-section {
+  max-width: 960px; /* mainのmax-widthと同じかそれに準ずる */
+  margin: 30px auto;
+  padding: 0 20px; /* mainのpaddingと合わせる */
   text-align: center;
 }
 
-.image-circle {
-  width: 80px;
-  height: 80px;
-  background: #bbb;
-  border-radius: 50%;
-  margin: 0 auto 10px;
+.welcome-text {
+  margin-bottom: 40px;
+  line-height: 1.8;
+  font-size: 1.1em;
+  color: #444;
 }
 
-.search-box input {
-  width: 80%;
-  padding: 8px;
-  margin-bottom: 10px;
+.welcome-text p {
+  margin-bottom: 15px;
 }
 
-.search-box button {
-  padding: 8px 12px;
+.quick-links {
+  display: flex;
+  flex-wrap: wrap; /* 小さい画面で折り返す */
+  justify-content: center; /* アイテムを中央揃え */
+  gap: 20px; /* アイテム間の余白を少し小さくする */
+  margin-top: 40px;
+}
+
+.quick-link-item {
+  background-color: #ffffff;
+  border: 1px solid #eee;
+  border-radius: 8px;
+  box-shadow: 0 4px 10px rgba(0,0,0,0.08);
+  padding: 20px;
+  text-align: center;
+  flex: 1 1 calc(33.33% - 20px); /* 3つ均等に並べ、gapを考慮した幅に */
+  max-width: 300px; /* 各アイテムの最大幅を設定し、はみ出さないようにする */
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.quick-link-item:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 6px 15px rgba(0,0,0,0.12);
+}
+
+.quick-link-item img {
+  width: 100%;
+  max-width: 180px; /* 画像の最大幅を調整 */
+  height: 120px; /* 画像の高さを固定し、object-fitで調整 */
+  object-fit: cover;
+  border-radius: 4px;
+  margin-bottom: 15px;
+}
+
+.quick-link-item p {
+  font-size: 1.1em;
+  font-weight: bold;
+  color: #0c2f56;
+  margin-bottom: 20px;
+  flex-grow: 1; /* テキストが占めるスペースを広げる */
+}
+
+/* contact-button は reserve.html から流用 */
+.contact-button {
+  display: inline-block;
+  background-color: #0c2f56;
+  color: white;
+  padding: 12px 25px;
+  border-radius: 5px;
+  text-decoration: none;
+  font-weight: bold;
+  font-size: 1.1em; /* リンクボタンの文字サイズを調整 */
+  transition: background-color 0.3s ease;
+  box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+  width: 100%; /* ボタンの幅をアイテムに合わせる */
+  max-width: 180px; /* ボタンの最大幅 */
+}
+
+.contact-button:hover {
+  background-color: #09223f;
 }
 
 footer {
   background: #222;
   color: white;
   text-align: center;
-  padding: 15px 0;
-  margin-top: 30px;
-  font-size: 14px;
+  padding: 20px 0;
+  margin-top: 50px;
+  font-size: 0.9em;
 }
+
+/* --- プロフィールページ (profile.html) のスタイル --- */
+
+/* 各セクションの共通スタイル (profile.html, reserve.html) */
+.profile-section {
+  background-color: #ffffff;
+  padding: 30px;
+  margin-bottom: 30px;
+  border-radius: 8px;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+}
+
+.profile-section h2, .profile-section h3, .contact-form h2 {
+  font-size: 1.8em;
+  color: #0c2f56;
+  margin-bottom: 25px;
+  text-align: center;
+  border-bottom: 2px solid #eee;
+  padding-bottom: 10px;
+}
+
+.profile-section h3 {
+  font-size: 1.5em;
+}
+
+/* プロフィール導入部分（画像とテキスト） */
+.profile-content {
+  display: flex;
+  align-items: flex-start;
+  gap: 30px;
+  margin-bottom: 20px;
+}
+
+/* プロフィール画像のラッパー (profilephoto.jpg) */
+.profile-image-wrapper {
+  flex-shrink: 0;
+  width: 300px;
+  height: auto;
+  overflow: hidden;
+  border: 4px solid #fff;
+  box-shadow: 0 0 10px rgba(0,0,0,0.15);
+}
+
+/* プロフィール画像自体 */
+.profile-photo-main {
+  width: 100%;
+  height: auto;
+  display: block;
+  /* object-fit: contain;  もし画像が収まらない場合はこちらを試してください */
+}
+
+/* プロフィールテキスト */
+.profile-text {
+  flex-grow: 1;
+  font-size: 1.1em;
+}
+
+.profile-name {
+  font-size: 2em;
+  font-weight: bold;
+  margin-bottom: 15px;
+  color: #333;
+  text-align: left;
+}
+
+.profile-text p {
+  margin-bottom: 15px;
+}
+
+/* 鑑定手法リスト */
+#methods ul {
+  list-style: none;
+  padding: 0;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 15px;
+}
+
+#methods ul li {
+  background-color: #f9f9f9;
+  padding: 15px;
+  border-left: 5px solid #0c2f56;
+  border-radius: 4px;
+  box-shadow: 0 1px 3px rgba(0,0,0,0.08);
+  font-size: 1em;
+}
+
+#methods ul li strong {
+  display: block;
+  font-size: 1.1em;
+  color: #0c2f56;
+  margin-bottom: 5px;
+}
+
+/* 人生相談リスト */
+#life-consultation ul {
+  list-style: none;
+  padding: 0;
+}
+
+#life-consultation ul li {
+  background-color: #f9f9f9;
+  padding: 12px 20px;
+  margin-bottom: 10px;
+  border-radius: 4px;
+  border: 1px solid #eee;
+  display: flex; /* Flexboxを適用 */
+  align-items: flex-start; /* アイテムの開始位置に揃える */
+  /* gap: 10px;  ← これで全体の間隔をコントロールできます（Modern CSS） */
+}
+
+#life-consultation ul li::before {
+  content: ''; /* 空にする */
+  width: 0;
+  height: 0;
+  margin-right: 10px; /* ここは以前のスペース調整のため残します */
+}
+
+#life-consultation ul li strong {
+  /* ここを修正・追加します */
+  display: inline-block; /* 幅を指定できるようにする */
+  min-width: 160px; /* ★調整ポイント：この値を調整して幅を揃えます */
+  /* white-space: nowrap; /* 強制的に改行させない - 必要に応じて残す */
+  margin-right: 15px; /* ★調整ポイント：strongとテキスト間の余白を確保 */
+  box-sizing: border-box; /* paddingやborderがwidthに含まれるように */
+}
+
+/* もし、strongタグ内の改行を厳密に制御したい場合 */
+#life-consultation ul li strong span {
+    display: inline; /* span自体は改行しない */
+}
+#life-consultation ul li strong br {
+    display: block; /* brタグは改行として機能させる */
+}
+
+/* 最初のテキスト（strongタグに続くテキスト）の開始位置を揃えるため */
+#life-consultation ul li {
+  /* ここは、もし既に display: flex; があれば変更不要です。 */
+  /* padding-left: 0; */ /* もしpadding-leftが原因でズレていればリセット */
+}
+
+/* 必要に応じて、モバイル時の調整も確認・更新 */
+@media (max-width: 768px) {
+    #life-consultation ul li {
+        flex-direction: column; /* モバイルでは縦並びにするか、PCと同じ横並びか検討 */
+        align-items: flex-start; /* アイテムの開始位置に揃える */
+    }
+    #life-consultation ul li strong {
+        min-width: unset; /* モバイルでは最小幅を解除して、コンテンツに合わせる */
+        margin-right: 0; /* モバイルでは右マージンをリセットまたは調整 */
+        margin-bottom: 5px; /* 必要であれば下マージンを追加 */
+    }
+}
+
+/* --- reserve.html 用のスタイル --- */
+.reservation-content {
+  font-size: 1.1em;
+  line-height: 1.8;
+}
+
+.reservation-content p {
+  margin-bottom: 1em;
+}
+
+.reservation-content h3 {
+  text-align: left;
+  border-bottom: none;
+  padding-bottom: 0;
+  margin-top: 2em;
+  margin-bottom: 0.8em;
+}
+
+.fee-list {
+  list-style: none;
+  padding: 0;
+  margin-bottom: 2em;
+  background-color: #f9f9f9;
+  padding: 15px 20px;
+  border-radius: 8px;
+  border: 1px solid #eee;
+}
+
+.fee-list li {
+  margin-bottom: 0.5em;
+  padding-left: 1.5em;
+  position: relative;
+}
+
+.fee-list li::before {
+  content: '▶';
+  color: #0c2f56;
+  position: absolute;
+  left: 0;
+  font-size: 0.8em;
+  top: 0.2em;
+}
+
+.fee-list li strong {
+  color: #0c2f56;
+  font-weight: bold;
+}
+
+.note-message {
+  font-size: 0.9em;
+  color: #d9534f;
+  font-weight: bold;
+  text-align: center;
+  margin-bottom: 2em;
+}
+
+.closing-message {
+  text-align: center;
+  margin-top: 30px;
+  font-style: italic;
+  color: #555;
+  font-size: 1.1em;
+  margin-bottom: 2em;
+}
+
+.access-title {
+  text-align: left;
+  border-bottom: 1px solid #eee;
+  padding-bottom: 5px;
+  margin-top: 2em;
+  margin-bottom: 1em;
+  color: #0c2f56;
+}
+
+.address, .phone {
+  font-size: 1.1em;
+  margin-bottom: 0.5em;
+}
+
+.google-map {
+  margin-top: 2em;
+  width: 100%;
+  overflow: hidden;
+  border-radius: 8px;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+}
+
+.google-map iframe {
+  width: 100%;
+  height: 450px;
+  border: 0;
+  display: block;
+}
+
+/* --- reserve.html 用のスタイル --- */
+/* 既存の .reservation-content はそのまま利用 */
+.reservation-content {
+  font-size: 1.1em;
+  line-height: 1.8;
+}
+
+.reservation-content p {
+  margin-bottom: 1em;
+}
+
+/* ① 「鑑定は、対面、メール、オンライン（Zoom）で承っております。」を中央寄せに */
+.reservation-types {
+  text-align: center;
+  margin-bottom: 2em; /* 他の要素との間隔を調整 */
+}
+
+.reservation-content h3 {
+  text-align: left;
+  border-bottom: none;
+  padding-bottom: 0;
+  margin-top: 2em;
+  margin-bottom: 0.8em;
+}
+
+/* ... 既存の .fee-list, .fee-list li, .fee-list li::before, .fee-list li strong は変更なし ... */
+
+.note-message {
+  font-size: 0.9em;
+  color: #d9534f;
+  font-weight: bold;
+  text-align: center;
+  margin-bottom: 2em;
+}
+
+.closing-message {
+  text-align: center;
+  margin-top: 30px;
+  font-style: italic;
+  color: #555;
+  font-size: 1.1em;
+  margin-bottom: 2em;
+}
+
+/* ② 新しいお問い合わせ誘導セクション */
+.contact-guidance {
+  text-align: center; /* テキストとボタンを中央寄せ */
+  margin-top: 30px;
+  margin-bottom: 40px; /* 鑑定場所との間に十分な余白 */
+  background-color: #f0f8ff; /* 薄い背景色 */
+  padding: 25px;
+  border-radius: 8px;
+  box-shadow: 0 2px 5px rgba(0,0,0,0.05);
+}
+
+.contact-guidance p {
+  font-size: 1.1em;
+  margin-bottom: 20px;
+  color: #333;
+}
+
+.contact-button {
+  display: inline-block; /* ボタンとして表示 */
+  background-color: #0c2f56; /* ボタンの背景色 */
+  color: white; /* ボタンの文字色 */
+  padding: 12px 25px;
+  border-radius: 5px;
+  text-decoration: none; /* 下線を削除 */
+  font-weight: bold;
+  font-size: 1.1em;
+  transition: background-color 0.3s ease;
+  box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+}
+
+.contact-button:hover {
+  background-color: #09223f; /* ホバー時の色 */
+}
+
+
+.access-title {
+  text-align: left; /* デスクトップでは左寄せ */
+  border-bottom: 1px solid #eee;
+  padding-bottom: 5px;
+  margin-top: 2em;
+  margin-bottom: 1em;
+  color: #0c2f56;
+}
+
+.address, .phone {
+  font-size: 1.1em;
+  margin-bottom: 0.5em;
+}
+
+.google-map {
+  margin-top: 2em;
+  width: 100%;
+  overflow: hidden;
+  border-radius: 8px;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+}
+
+.google-map iframe {
+  width: 100%;
+  height: 450px;
+  border: 0;
+  display: block;
+}
+
+
+/* フォーム関連のCSSは、contact.htmlで使用されるものとして残します */
+.contact-form {
+  background: #fff;
+  box-shadow: 0 0 10px rgba(0,0,0,0.1);
+  border-radius: 6px;
+  padding: 30px;
+}
+
+.contact-form h1 {
+  margin-bottom: 15px;
+  font-size: 24px;
+}
+
+.contact-form p {
+  margin-bottom: 20px;
+  line-height: 1.6;
+  color: #555;
+  text-align: center;
+}
+
+.form-group {
+  margin-bottom: 20px;
+  width:80%;
+}
+
+.submit {
+  margin-bottom: 20px;
+  width:100%;
+}
+
+label {
+  font-weight: bold;
+  display: block;
+  margin-bottom: 8px;
+}
+
+.required {
+  color: red;
+}
+
+input[type="text"],
+input[type="email"],
+input[type="tel"] {
+  width: 80%;
+  padding: 10px;
+  font-size: 1rem;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+}
+textarea {
+  width: 100%;
+  padding: 10px;
+  font-size: 1rem;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  resize: vertical;
+}
+
+.required {
+  color: red;
+  margin-left: 5px;
+}
+
+/* 日時希望欄 */
+.datetime-group {
+  margin-bottom: 20px;
+}
+
+.datetime-group legend {
+  font-weight: bold;
+  margin-bottom: 10px;
+}
+
+.datetime {
+  display: flex;
+  gap: 10px;
+  align-items: center;
+  margin-bottom: 10px;
+}
+
+.datetime input[type="date"],
+.datetime input[type="time"] {
+  width: 150px;
+}
+
+/* 備考 */
+.note {
+  font-size: 0.9em;
+  color: #666;
+}
+
+/* ボタン中央寄せ */
+.submit button {
+  padding: 10px 30px;
+  font-size: 1rem;
+  border: none;
+  background-color: #0c2f56;
+  color: white;
+  border-radius: 4px;
+  cursor: pointer;
+  display: block;
+  margin: 0 auto;
+}
+
+/* フォーム関連のCSSは、contact.htmlで使用されるものとして残します */
+/* 変更前: .contact-form */
+.contact-form-inner { /* クラス名を変更 */
+  max-width: 700px; /* フォーム自体の最大幅 */
+  margin: 0 auto; /* 中央寄せ (profile-section 内で中央に) */
+  background: #fff; /* 背景色 (profile-sectionが白なので基本不要) */
+  padding: 40px 30px; /* フォームのパディング (profile-sectionのパディングと合わせるか調整) */
+  box-shadow: 0 0 10px rgba(0,0,0,0.1); /* シャドウ (profile-sectionのシャドウと合わせるか調整) */
+  border-radius: 6px; /* 角丸 (profile-sectionの角丸と合わせるか調整) */
+  /* padding, box-shadow, border-radius は profile-section と重複するので、
+     不要であればコメントアウトまたは削除しても構いません。
+     ここでは、フォーム独自の装飾として残しています。 */
+}
+
+/* contact-form h1 は h2 に変更したので不要 */
+/* .contact-form h1 {
+  margin-bottom: 15px;
+  font-size: 24px;
+} */
+
+.contact-form-inner p { /* クラス名を変更 */
+  margin-bottom: 20px;
+  line-height: 1.6;
+  color: #555;
+  text-align: center; /* フォーム直下の説明文を中央寄せに */
+}
+
+/* 他の .form-group や input, textarea などのスタイルはそのまま利用できます */
+/* .form-group はそのまま
+label はそのまま
+.required はそのまま
+input[type="text"], input[type="email"], input[type="tel"], textarea はそのまま
+.datetime-group はそのまま
+.datetime はそのまま
+.datetime input[type="date"], .datetime input[type="time"] はそのまま
+.note はそのまま
+.form-group button はそのまま */
