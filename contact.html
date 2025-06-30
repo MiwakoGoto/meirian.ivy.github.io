@@ -8,26 +8,102 @@
 </head>
 <body>
   <header>
-    <div class="logo-area">
-      <h1>運命鑑定<br><span>命理庵</span></h1>
-    </div>
+   <div class="logo-area">
+  <h1>
+    <span>運命鑑定</span>
+    <span class="main-title">命理庵</span>
+  </h1>
+</div>
     <nav class="main-nav">
       <ul>
-        <li><a href="#">HOME</a></li>
-        <li><a href="#">プロフィール</a></li>
-        <li><a href="#">運命鑑定とは？</a></li>
-        <li><a href="#">コラム</a></li>
-        <li><a href="#">お問い合わせ</a></li>
+        <li><a href="index.html">HOME</a></li>
+        <li><a href="profile.html">プロフィール</a></li>
+        <li><a href="reserve.html">ご予約について</a></li>
+        <li><a href="https://note.com/meirian">コラム</a></li>
+        <li><a href="contact.html">お問い合わせ</a></li>
       </ul>
     </nav>
   </header>
 
   <main>
-   
+   <div class="contact-form">
+    <h2>お問い合わせ</h2>
+    <p>以下の各項目にご記入の上、「確認画面へ」を押してください。<br>* は必須入力項目なので、必ずご記入をお願いいたします。</p>
+
+    <form action="confirm.html" method="post">
+      <fieldset style="border: none;">
+        <div class="form-group">
+          <label for="name">お名前 <span class="required">*</span></label>
+          <input type="text" id="name" name="name" required>
+        </div>
+
+        <div class="form-group">
+          <label for="email">メールアドレス <span class="required">*</span></label>
+          <input type="email" id="email" name="email" required>
+        </div>
+
+        <div class="form-group">
+          <label for="tel">電話番号 <span class="required">*</span></label>
+          <input type="tel" id="tel" name="tel" placeholder="090-1234-5678" required>
+        </div>
+
+        <fieldset class="form-group datetime-group">
+          <legend>ご希望日時 <span class="required">*</span></legend>
+          <div class="datetime">
+            <label for="date1">第1希望</label>
+            <input type="date" id="date1" name="date1" required>
+            <input type="time" id="time1" name="time1" min="09:00" max="20:00" step="1800" list="time-suggestions" required>
+            <datalist id="time-suggestions"></datalist>
+          </div>
+          <div class="datetime">
+            <label for="date2">第2希望</label>
+            <input type="date" id="date2" name="date2">
+            <input type="time" id="time2" name="time2" min="09:00" max="20:00" step="1800" list="time-suggestions">
+          </div>
+          <p class="note">※営業時間（9:00〜20:00）以外はご対応できない場合があります</p>
+        </fieldset>
+
+        <div class="form-group">
+          <label for="message">お問い合わせ内容 <span class="required">*</span></label>
+          <textarea id="message" name="message" rows="6" required></textarea>
+        </div>
+
+        <div class="submit">
+          <button type="submit">確認画面へ</button>
+        </div>
+      </fieldset>
+    </form>
+    </div>
   </main>
 
-  <footer>
-    <p>Copyright © 運命鑑定 命理庵 All Rights Reserved.</p>
-  </footer>
+<footer>
+    <p>Copyright © 運命鑑定 命理庵 All Rights Reserved.</p>
+  </footer>
+
+  <script>
+    document.addEventListener('DOMContentLoaded', function() {
+      const datalist = document.getElementById('time-suggestions');
+      const startHour = 9;
+      const endHour = 20; // 20:00 まで含む
+      const intervalMinutes = 30;
+
+      for (let h = startHour; h <= endHour; h++) {
+        for (let m = 0; m < 60; m += intervalMinutes) {
+          // 20:00 を超える時間は含めない
+          if (h === endHour && m > 0) {
+            continue;
+          }
+
+          const hour = String(h).padStart(2, '0');
+          const minute = String(m).padStart(2, '0');
+          const time = `${hour}:${minute}`;
+
+          const option = document.createElement('option');
+          option.value = time;
+          datalist.appendChild(option);
+        }
+      }
+    });
+  </script>
 </body>
 </html>
