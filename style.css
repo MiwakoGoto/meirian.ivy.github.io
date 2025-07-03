@@ -31,7 +31,7 @@ header img { /* ヘッダー画像用スタイル */
 }
 
 /* スマートフォンなど小さい画面での調整 */
-@media (max-width: 768px) {
+@media (max-width: 500px) {
     header img {
         height: 150px; /* ★修正：モバイル時は高さを低くする */
         margin-top: 0;
@@ -120,6 +120,9 @@ header img { /* ヘッダー画像用スタイル */
     .contact-button {
         padding: 10px 20px;
         font-size: 1em;
+    }
+    .form-group .datetime-group {
+      width: 100%;
     }
 }  
   
@@ -500,7 +503,6 @@ footer {
 .closing-message {
   text-align: center;
   margin-top: 30px;
-  font-style: italic;
   color: #333;
   font-size: 1.1em;
   margin-bottom: 2em;
@@ -785,3 +787,29 @@ input[type="text"], input[type="email"], input[type="tel"], textarea はその�
 .datetime input[type="date"], .datetime input[type="time"] はそのまま
 .note はそのまま
 .form-group button はそのまま */
+
+/* ... 既存のモバイル用スタイル ... */
+@media (max-width: 500px) {
+    .datetime {
+      margin: 0; /* マージンをリセット */
+      flex-direction: column; /* 日付と時刻の入力を縦に積み重ねる */
+      align-items: flex-start; /* アイテムを左寄せにする */
+      gap: 0.1px; /* 積み重ねたアイテム間の間隔を狭める */
+      padding-left: 10px; /* 左パディングを追加 */
+    }
+    .datetime label {
+      margin: 0; /* ラベルのマージンをリセット */
+    }
+    .datetime input[type="date"],
+    .datetime input[type="time"] {
+      width: 100%; /* 入力フィールドを全幅にする */
+      max-width: 250px; /* (任意) 入力フィールドの最大幅を設定 */
+    }
+    .datetime-group .note {
+      margin-top: 0; /* 注記の上マージンをリセット */
+      text-align: left; /* 注記を左寄せにする */
+      padding-left: 10px; /* 左パディングを追加 */
+      padding-right: 10px; /* 右パディングを追加 */
+    }
+}
+ 
