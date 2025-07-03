@@ -796,6 +796,7 @@ input[type="text"], input[type="email"], input[type="tel"], textarea はその�
       align-items: flex-start; /* アイテムを左寄せにする */
       gap: 0.1px; /* 積み重ねたアイテム間の間隔を狭める */
       padding-left: 10px; /* 左パディングを追加 */
+      padding-right: 10px; /* 右パディングを追加 */
     }
     .datetime label {
       margin: 0; /* ラベルのマージンをリセット */
